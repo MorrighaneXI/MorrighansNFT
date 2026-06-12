@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { VerticalStreaks } from "@/components/vertical-streaks";
+import { FloatingSchoolItems } from "@/components/floating-school-items";
 import {
   ShieldCheck,
   Sparkles,
