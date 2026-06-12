@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { useWallet, shortAddress } from "@/lib/wallet-context";
-import { addModule, CATEGORIES, generateCid, generateTxHash, hashFile, type ModuleCategory } from "@/lib/modules-store";
+import { addModule, CATEGORIES, generateCid, generateSignature, generateMintAddress, hashFile, type ModuleCategory } from "@/lib/modules-store";
 import { toast } from "sonner";
 import { Sparkles, ArrowRight } from "lucide-react";
 
@@ -72,7 +72,8 @@ function UploadForm() {
       // 3. On-chain mint (simulated)
       setStage({ name: "chain" });
       await new Promise((r) => setTimeout(r, 1400));
-      const tx = generateTxHash();
+      const signature = generateSignature();
+      const mintAddress = generateMintAddress();
 
       // 4. Done
       const tokenId = 1000 + Math.floor(Math.random() * 9000);
@@ -90,15 +91,16 @@ function UploadForm() {
         fileType: file.type || "unknown",
         hash: h,
         ipfsCid: cid,
-        txHash: tx,
+        mintAddress,
+        signature,
         owner: shortAddress(address),
         royaltyBps: 1000,
         downloads: 0,
-        royaltiesWei: "0.0000",
+        royaltiesSol: "0.0000",
         mintedAt: Date.now(),
       };
       addModule(newModule);
-      setStage({ name: "done", tx, cid, hash: h });
+      setStage({ name: "done", tx: signature, cid, hash: h });
 
       toast.success("Mint berhasil!", {
         description: `Token #${tokenId} diterbitkan ke wallet Anda.`,
@@ -188,7 +190,7 @@ function UploadForm() {
             <div className="mt-4 grid gap-4 sm:grid-cols-3 text-sm">
               <div className="rounded-xl bg-secondary/50 p-4">
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Standard</div>
-                <div className="mt-1 font-mono">ERC-721</div>
+                <div className="mt-1 font-mono">Metaplex NFT</div>
               </div>
               <div className="rounded-xl bg-secondary/50 p-4">
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Royalty Fee</div>
@@ -196,7 +198,7 @@ function UploadForm() {
               </div>
               <div className="rounded-xl bg-secondary/50 p-4">
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Network</div>
-                <div className="mt-1 font-mono">Sepolia Testnet</div>
+                <div className="mt-1 font-mono">Solana Devnet</div>
               </div>
             </div>
           </section>
@@ -211,7 +213,7 @@ function UploadForm() {
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-end">
             <div className="text-xs text-muted-foreground sm:mr-auto">
               <Sparkles className="mr-1 inline h-3 w-3 text-chain" />
-              Estimasi gas: ~0.0012 ETH (testnet)
+              Estimasi biaya transaksi: ~0.00025 SOL (devnet)
             </div>
             <Button size="lg" disabled={!canSubmit} onClick={handleMint} className="bg-primary">
               {minting ? "Memproses…" : "Mint NFT"} {!minting && <ArrowRight className="ml-2 h-4 w-4" />}
