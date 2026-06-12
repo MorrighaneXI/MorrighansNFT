@@ -21,7 +21,7 @@ export function ConnectWalletButton() {
       <Button
         onClick={() =>
           connect()
-            .then(() => toast.success("Wallet terhubung", { description: "Testnet Sepolia siap digunakan." }))
+            .then(() => toast.success("Wallet terhubung", { description: "Solana Devnet siap digunakan." }))
             .catch(() => toast.error("Gagal menghubungkan wallet"))
         }
         disabled={isConnecting}
@@ -39,7 +39,7 @@ export function ConnectWalletButton() {
         <Button variant="outline" className="font-mono">
           <span className="mr-2 inline-block h-2 w-2 rounded-full bg-success animate-pulse" />
           {shortAddress(address)}
-          <span className="ml-3 text-muted-foreground">{balance} ETH</span>
+          <span className="ml-3 text-muted-foreground">{balance} SOL</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-72">
@@ -52,7 +52,7 @@ export function ConnectWalletButton() {
           <div className="text-xs text-muted-foreground">Alamat</div>
           <div className="font-mono text-xs break-all mt-1">{address}</div>
           <div className="text-xs text-muted-foreground mt-3">Saldo Testnet</div>
-          <div className="text-lg font-semibold">{balance} ETH</div>
+          <div className="text-lg font-semibold">{balance} SOL</div>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem
