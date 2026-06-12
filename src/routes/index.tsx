@@ -69,7 +69,7 @@ function LandingPage() {
             <div className="mt-10 flex flex-wrap items-center gap-6 text-xs text-primary-foreground/70">
               <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-chain" /> SHA-256 Verified</div>
               <div className="flex items-center gap-2"><Database className="h-4 w-4 text-chain" /> IPFS Storage</div>
-              <div className="flex items-center gap-2"><Anchor className="h-4 w-4 text-chain" /> ERC-721 Standard</div>
+              <div className="flex items-center gap-2"><Anchor className="h-4 w-4 text-chain" /> Metaplex NFT Standard</div>
             </div>
           </div>
 
@@ -94,12 +94,12 @@ function LandingPage() {
                   </div>
                   <div className="col-span-2">
                     <div className="text-primary-foreground/50 uppercase tracking-wider">Content Hash</div>
-                    <div className="font-mono mt-1 truncate">0x9f1a3b7c8e2d4f5a6b7c…</div>
+                    <div className="font-mono mt-1 truncate">9f1a3b7c8e2d4f5a6b7c…</div>
                   </div>
                 </div>
               </div>
               <div className="mt-4 flex items-center justify-between text-xs">
-                <span className="font-mono text-primary-foreground/60">0xA42f…91Cd</span>
+                <span className="font-mono text-primary-foreground/60">AnKx…UaM</span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-success/20 px-2 py-1 text-success">
                   <span className="h-1.5 w-1.5 rounded-full bg-success" /> Minted
                 </span>
@@ -182,7 +182,7 @@ function LandingPage() {
             {[
               { i: Fingerprint, t: "Hashing", d: "File dipindai dan diubah jadi sidik jari SHA-256." },
               { i: Database, t: "IPFS", d: "Metadata diunggah ke jaringan penyimpanan terdesentralisasi." },
-              { i: Anchor, t: "Mint", d: "Smart contract menerbitkan token ERC-721 atas nama Anda." },
+              { i: Anchor, t: "Mint", d: "Program Solana menerbitkan NFT Metaplex atas nama Anda." },
               { i: BadgeCheck, t: "Verifikasi", d: "Sertifikat publik siap dibagikan & diverifikasi siapa saja." },
             ].map((s, idx) => {
               const Icon = s.i;

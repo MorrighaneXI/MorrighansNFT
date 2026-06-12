@@ -1,11 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-// Mock wallet provider. Structured so it can be swapped for wagmi/ethers later
-// by replacing the connect/disconnect implementations.
+// Mock Solana wallet provider. Structured so it can be swapped for
+// @solana/wallet-adapter-react + @solana/web3.js later.
 
 type WalletState = {
   address: string | null;
-  balance: string; // ETH testnet, formatted
+  balance: string; // SOL devnet, formatted
   chainName: string;
   isConnected: boolean;
   isConnecting: boolean;
@@ -16,17 +16,22 @@ type WalletState = {
 const WalletContext = createContext<WalletState | null>(null);
 
 const STORAGE_KEY = "morrighans:wallet";
+const BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+
+function randomBase58(len: number) {
+  let out = "";
+  for (let i = 0; i < len; i++) out += BASE58[Math.floor(Math.random() * BASE58.length)];
+  return out;
+}
 
 function randomAddress() {
-  const chars = "0123456789abcdef";
-  let out = "0x";
-  for (let i = 0; i < 40; i++) out += chars[Math.floor(Math.random() * 16)];
-  return out;
+  // Solana public keys are base58-encoded, typically 43–44 chars.
+  return randomBase58(44);
 }
 
 export function shortAddress(addr: string | null | undefined) {
   if (!addr) return "";
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+  return `${addr.slice(0, 4)}...${addr.slice(-4)}`;
 }
 
 export function WalletProvider({ children }: { children: ReactNode }) {
@@ -50,10 +55,9 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   const connect = useCallback(async () => {
     setIsConnecting(true);
-    // Simulate wallet handshake latency
     await new Promise((r) => setTimeout(r, 900));
     const addr = randomAddress();
-    const bal = (Math.random() * 4 + 0.25).toFixed(4);
+    const bal = (Math.random() * 12 + 0.5).toFixed(4); // SOL devnet airdrop range
     setAddress(addr);
     setBalance(bal);
     if (typeof window !== "undefined") {
@@ -72,7 +76,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     () => ({
       address,
       balance,
-      chainName: "Sepolia Testnet",
+      chainName: "Solana Devnet",
       isConnected: !!address,
       isConnecting,
       connect,
@@ -89,3 +93,5 @@ export function useWallet() {
   if (!ctx) throw new Error("useWallet must be used within WalletProvider");
   return ctx;
 }
+
+export { randomBase58 };

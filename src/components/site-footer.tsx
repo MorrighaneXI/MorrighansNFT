@@ -26,9 +26,9 @@ export function SiteFooter() {
         <div>
           <div className="text-sm font-semibold mb-3">Teknologi</div>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>ERC-721 Standard</li>
+            <li>Metaplex NFT Standard</li>
             <li>IPFS Storage</li>
-            <li>Sepolia Testnet</li>
+            <li>Solana Devnet</li>
           </ul>
         </div>
       </div>

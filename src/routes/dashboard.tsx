@@ -38,13 +38,13 @@ function DashboardContent() {
   // Aggregated demo stats. If user owns nothing yet, show a teaser using the global library.
   const showcase = owned.length > 0 ? owned : all.slice(0, 3);
   const totalDownloads = showcase.reduce((acc, m) => acc + m.downloads, 0);
-  const totalRoyalties = showcase.reduce((acc, m) => acc + parseFloat(m.royaltiesWei), 0).toFixed(4);
+  const totalRoyalties = showcase.reduce((acc, m) => acc + parseFloat(m.royaltiesSol), 0).toFixed(4);
 
   const stats = [
     { icon: FileStack, label: "Modul terbit", value: showcase.length.toString(), accent: "bg-primary text-primary-foreground" },
     { icon: Download, label: "Total unduhan", value: totalDownloads.toLocaleString("id-ID"), accent: "bg-chain text-primary" },
-    { icon: Coins, label: "Royalti terkumpul", value: `${totalRoyalties} ETH`, accent: "bg-success text-success-foreground" },
-    { icon: TrendingUp, label: "Saldo wallet", value: `${balance} ETH`, accent: "bg-primary-glow text-primary-foreground" },
+    { icon: Coins, label: "Royalti terkumpul", value: `${totalRoyalties} SOL`, accent: "bg-success text-success-foreground" },
+    { icon: TrendingUp, label: "Saldo wallet", value: `${balance} SOL`, accent: "bg-primary-glow text-primary-foreground" },
   ];
 
   return (
@@ -107,7 +107,7 @@ function DashboardContent() {
                   <td className="py-3">{m.title}</td>
                   <td className="py-3 font-mono text-xs">#{m.tokenId}</td>
                   <td className="py-3">{m.downloads}</td>
-                  <td className="py-3 text-right font-mono text-chain">{m.royaltiesWei} ETH</td>
+                  <td className="py-3 text-right font-mono text-chain">{m.royaltiesSol} SOL</td>
                 </tr>
               ))}
             </tbody>

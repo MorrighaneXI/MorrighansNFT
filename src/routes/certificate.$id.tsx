@@ -92,14 +92,16 @@ function CertificatePage() {
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <div className="md:col-span-2 rounded-2xl border border-border bg-card p-6 shadow-card-soft">
           <h2 className="font-display text-lg font-semibold">Detail Blockchain</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Catatan transaksi mint di Sepolia Testnet (simulasi explorer).</p>
+          <p className="mt-1 text-sm text-muted-foreground">Catatan transaksi mint di Solana Devnet (simulasi explorer).</p>
 
           <div className="mt-5 divide-y divide-border text-sm">
             <Row label="Content Hash (SHA-256)" value={m.hash} mono onCopy={() => copy(m.hash, "hash")} copied={copied === "hash"} />
             <Row label="IPFS CID" value={m.ipfsCid} mono onCopy={() => copy(m.ipfsCid, "cid")} copied={copied === "cid"}
               external={`https://ipfs.io/ipfs/${m.ipfsCid}`} />
-            <Row label="Transaction Hash" value={m.txHash} mono onCopy={() => copy(m.txHash, "tx")} copied={copied === "tx"}
-              external={`https://sepolia.etherscan.io/tx/${m.txHash}`} />
+            <Row label="Mint Address" value={m.mintAddress} mono onCopy={() => copy(m.mintAddress, "mint")} copied={copied === "mint"}
+              external={`https://explorer.solana.com/address/${m.mintAddress}?cluster=devnet`} />
+            <Row label="Transaction Signature" value={m.signature} mono onCopy={() => copy(m.signature, "sig")} copied={copied === "sig"}
+              external={`https://explorer.solana.com/tx/${m.signature}?cluster=devnet`} />
             <Row label="Owner" value={m.owner} mono />
             <Row label="Diterbitkan" value={new Date(m.mintedAt).toLocaleString("id-ID", { dateStyle: "long", timeStyle: "short" })} />
             <Row label="File" value={`${m.fileName} · ${(m.fileSize / 1024 / 1024).toFixed(2)} MB`} />
@@ -116,7 +118,7 @@ function CertificatePage() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Royalti terkumpul</span>
-                <span className="font-mono text-chain">{m.royaltiesWei} ETH</span>
+                <span className="font-mono text-chain">{m.royaltiesSol} SOL</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Status</span>
@@ -133,7 +135,7 @@ function CertificatePage() {
               Sertifikat ini dapat diverifikasi oleh siapa saja melalui blockchain explorer.
             </p>
             <Button asChild className="mt-4 w-full bg-primary">
-              <a href={`https://sepolia.etherscan.io/tx/${m.txHash}`} target="_blank" rel="noreferrer">
+              <a href={`https://explorer.solana.com/tx/${m.signature}?cluster=devnet`} target="_blank" rel="noreferrer">
                 Buka di Explorer <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
