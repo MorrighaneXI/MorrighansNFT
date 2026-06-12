@@ -36,7 +36,7 @@ export type MintedModule = {
   mintedAt: number;
 };
 
-const KEY = "morrighans:modules";
+const KEY = "morrighans:modules:v2-sol";
 
 const SEED: MintedModule[] = [
   {
