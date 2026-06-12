@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { VerticalStreaks } from "@/components/vertical-streaks";
 import {
   ShieldCheck,
   Sparkles,
@@ -38,6 +39,7 @@ function LandingPage() {
       {/* HERO */}
       <section className="relative overflow-hidden bg-hero text-primary-foreground">
         <div className="absolute inset-0 bg-grid opacity-30" />
+        <VerticalStreaks />
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary-glow/40 blur-3xl" />
         <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-chain/30 blur-3xl" />
 
@@ -203,6 +205,7 @@ function LandingPage() {
       <section className="container mx-auto px-4 py-20 md:px-8">
         <div className="relative overflow-hidden rounded-3xl bg-hero p-10 text-primary-foreground shadow-elegant md:p-16">
           <div className="absolute inset-0 bg-grid opacity-20" />
+          <VerticalStreaks />
           <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto]">
             <div>
               <h3 className="font-display text-2xl font-bold md:text-3xl text-balance">
