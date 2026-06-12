@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { VerticalStreaks } from "@/components/vertical-streaks";
 import {
   ShieldCheck,
   Sparkles,
