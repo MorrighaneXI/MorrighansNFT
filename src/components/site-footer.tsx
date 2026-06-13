@@ -6,8 +6,8 @@ export function SiteFooter() {
       <div className="container mx-auto grid gap-8 px-4 py-12 md:grid-cols-3 md:px-8">
         <div>
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-hero">
-              <ShieldCheck className="h-4 w-4 text-primary-foreground" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white overflow-hidden">
+              <img src={logoAsset.url} alt="Morrighans logo" className="h-6 w-6 object-contain" />
             </div>
             <div className="font-display font-semibold">Morrighans NFT</div>
           </div>
