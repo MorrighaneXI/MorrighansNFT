@@ -14,8 +14,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-hero shadow-card-soft">
-            <ShieldCheck className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-card-soft overflow-hidden">
+            <img src={logoAsset.url} alt="Morrighans logo" className="h-7 w-7 object-contain" />
           </div>
           <div className="leading-tight">
             <div className="font-display text-base font-semibold">Morrighans</div>
