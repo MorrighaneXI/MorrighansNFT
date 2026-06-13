@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ConnectWalletButton } from "./connect-wallet-button";
-import { ShieldCheck } from "lucide-react";
+import logoAsset from "@/assets/morrighans-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Beranda" },
