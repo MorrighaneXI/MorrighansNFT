@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import logoAsset from "@/assets/morrighans-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
