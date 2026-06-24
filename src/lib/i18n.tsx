@@ -1724,6 +1724,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
 export function useI18n() {
   const ctx = useContext(I18nContext);
-  if (!ctx) throw new Error("useI18n must be used within I18nProvider");
-  return ctx;
+  if (ctx) return ctx;
+  // Fallback when used outside provider (e.g. error/notfound boundaries)
+  const t = (key: string, vars?: Record<string, string | number>) => {
+    let s = DICTS.en[key] ?? key;
+    if (vars) for (const [k, v] of Object.entries(vars)) s = s.replace(`{${k}}`, String(v));
+    return s;
+  };
+  return { lang: "en" as LangCode, setLang: () => {}, t };
 }
