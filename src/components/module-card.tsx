@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { BadgeCheck, Download, FileText } from "lucide-react";
 import type { MintedModule } from "@/lib/modules-store";
+import { useI18n } from "@/lib/i18n";
 
 const categoryGradient: Record<string, string> = {
   Sains: "from-sky-500/30 to-indigo-500/30",
@@ -13,6 +14,7 @@ const categoryGradient: Record<string, string> = {
 };
 
 export function ModuleCard({ m }: { m: MintedModule }) {
+  const { t } = useI18n();
   const grad = categoryGradient[m.category] ?? "from-primary/30 to-primary-glow/30";
   return (
     <Link
@@ -29,7 +31,7 @@ export function ModuleCard({ m }: { m: MintedModule }) {
           #{m.tokenId}
         </div>
         <div className="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-md bg-primary/90 px-2 py-1 text-[10px] font-medium text-primary-foreground">
-          {m.category}
+          {t(`cat.${m.category}`)}
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
           <FileText className="h-14 w-14 text-foreground/30 transition group-hover:scale-110" />
@@ -40,7 +42,7 @@ export function ModuleCard({ m }: { m: MintedModule }) {
         <div className="mt-1 text-xs text-muted-foreground">{m.educator} · {m.institution}</div>
         <div className="mt-3 flex items-center justify-between text-xs">
           <span className="inline-flex items-center gap-1 text-muted-foreground">
-            <Download className="h-3 w-3" /> {m.downloads.toLocaleString("id-ID")}
+            <Download className="h-3 w-3" /> {m.downloads.toLocaleString()}
           </span>
           <span className="font-mono text-chain">{(m.royaltyBps / 100).toFixed(0)}% royalty</span>
         </div>

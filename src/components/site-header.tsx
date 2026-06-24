@@ -1,15 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { ConnectWalletButton } from "./connect-wallet-button";
+import { LanguageSwitcher } from "./language-switcher";
+import { useI18n } from "@/lib/i18n";
 import logoAsset from "@/assets/morrighans-logo.png.asset.json";
 
-const nav = [
-  { to: "/", label: "Beranda" },
-  { to: "/gallery", label: "Galeri Modul" },
-  { to: "/upload", label: "Mint Modul" },
-  { to: "/dashboard", label: "Dashboard" },
-];
-
 export function SiteHeader() {
+  const { t } = useI18n();
+  const nav = [
+    { to: "/", label: t("nav.home") },
+    { to: "/gallery", label: t("nav.gallery") },
+    { to: "/upload", label: t("nav.upload") },
+    { to: "/dashboard", label: t("nav.dashboard") },
+  ];
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
@@ -19,7 +22,7 @@ export function SiteHeader() {
           </div>
           <div className="leading-tight">
             <div className="font-display text-base font-semibold">Morrighans</div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">NFT for Educators</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{t("nav.tagline")}</div>
           </div>
         </Link>
 
@@ -37,7 +40,10 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <ConnectWalletButton />
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <ConnectWalletButton />
+        </div>
       </div>
     </header>
   );

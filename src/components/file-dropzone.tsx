@@ -1,9 +1,11 @@
 import { useCallback, useRef, useState } from "react";
 import { UploadCloud, FileCheck2, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export function FileDropzone({ file, onFile }: { file: File | null; onFile: (f: File | null) => void }) {
   const [drag, setDrag] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
+  const { t } = useI18n();
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
@@ -32,7 +34,7 @@ export function FileDropzone({ file, onFile }: { file: File | null; onFile: (f: 
         <button
           onClick={() => onFile(null)}
           className="rounded-md p-2 text-muted-foreground transition hover:bg-secondary hover:text-foreground"
-          aria-label="Hapus file"
+          aria-label={t("drop.remove")}
         >
           <X className="h-4 w-4" />
         </button>
@@ -56,8 +58,8 @@ export function FileDropzone({ file, onFile }: { file: File | null; onFile: (f: 
       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
         <UploadCloud className="h-7 w-7" />
       </div>
-      <div className="mt-4 font-medium">Tarik & lepas file modul di sini</div>
-      <div className="mt-1 text-xs text-muted-foreground">PDF, MP4, atau gambar infografis · maks 50MB</div>
+      <div className="mt-4 font-medium">{t("drop.drag")}</div>
+      <div className="mt-1 text-xs text-muted-foreground">{t("drop.types")}</div>
       <input
         ref={ref}
         type="file"

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Fingerprint, Cpu, Database, Anchor, CheckCircle2 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export type MintStage =
   | { name: "idle" }
@@ -8,15 +9,16 @@ export type MintStage =
   | { name: "chain"; tx?: string }
   | { name: "done"; tx: string; cid: string; hash: string };
 
-const steps = [
-  { key: "hashing", label: "SHA-256 Hashing", icon: Fingerprint },
-  { key: "ipfs", label: "Upload ke IPFS", icon: Database },
-  { key: "chain", label: "Sign & Mint on-chain", icon: Cpu },
-  { key: "done", label: "Token diterbitkan", icon: Anchor },
+const stepsMeta = [
+  { key: "hashing", labelKey: "hash.step_hashing", icon: Fingerprint },
+  { key: "ipfs", labelKey: "hash.step_ipfs", icon: Database },
+  { key: "chain", labelKey: "hash.step_chain", icon: Cpu },
+  { key: "done", labelKey: "hash.step_done", icon: Anchor },
 ] as const;
 
 export function HashingVisualizer({ stage, hash }: { stage: MintStage; hash?: string }) {
-  const activeIdx = steps.findIndex((s) => s.key === stage.name);
+  const { t } = useI18n();
+  const activeIdx = stepsMeta.findIndex((s) => s.key === stage.name);
   const [stream, setStream] = useState<string[]>([]);
 
   useEffect(() => {
@@ -36,13 +38,13 @@ export function HashingVisualizer({ stage, hash }: { stage: MintStage; hash?: st
       <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
         <div className="flex items-center gap-2 text-sm font-medium">
           <span className="h-2 w-2 rounded-full bg-chain animate-pulse" />
-          Cryptographic Pipeline
+          {t("hash.title")}
         </div>
         <span className="font-mono text-xs text-primary-foreground/60">morrighans.proto://mint</span>
       </div>
 
       <div className="grid gap-0 md:grid-cols-4">
-        {steps.map((s, i) => {
+        {stepsMeta.map((s, i) => {
           const Icon = s.icon;
           const isActive = i === activeIdx;
           const isDone = i < activeIdx || stage.name === "done";
@@ -64,7 +66,7 @@ export function HashingVisualizer({ stage, hash }: { stage: MintStage; hash?: st
               >
                 {isDone ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
               </div>
-              <div className="text-xs font-medium tracking-wide">{s.label}</div>
+              <div className="text-xs font-medium tracking-wide">{t(s.labelKey)}</div>
               {isActive && stage.name === "hashing" && (
                 <div className="mt-1 h-1 w-full max-w-[120px] overflow-hidden rounded-full bg-white/10">
                   <div className="h-full bg-chain transition-all" style={{ width: `${Math.round(stage.progress * 100)}%` }} />
@@ -81,7 +83,7 @@ export function HashingVisualizer({ stage, hash }: { stage: MintStage; hash?: st
         )}
         <div className="p-4 space-y-0.5">
           {stage.name === "idle" && (
-            <div className="text-primary-foreground/40">// menunggu file untuk diproses…</div>
+            <div className="text-primary-foreground/40">{t("hash.waiting")}</div>
           )}
           {stream.map((line, i) => (
             <div key={i} style={{ opacity: 1 - i * 0.1 }}>
@@ -93,7 +95,7 @@ export function HashingVisualizer({ stage, hash }: { stage: MintStage; hash?: st
 
       {hash && (
         <div className="border-t border-white/10 px-5 py-3 text-xs">
-          <div className="text-primary-foreground/50 uppercase tracking-wider">Content Hash · SHA-256</div>
+          <div className="text-primary-foreground/50 uppercase tracking-wider">{t("hash.content_hash")}</div>
           <div className="mt-1 break-all font-mono text-chain">{hash}</div>
         </div>
       )}
