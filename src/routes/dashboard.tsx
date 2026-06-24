@@ -78,9 +78,6 @@ function DashboardContent() {
       <div className="mt-12">
         <div className="flex items-center justify-between">
           <h2 className="font-display text-xl font-semibold">Modul Anda</h2>
-          {owned.length === 0 && (
-            <span className="text-xs text-muted-foreground">Belum ada modul — menampilkan contoh dari galeri</span>
-          )}
         </div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {showcase.map((m) => (
@@ -90,7 +87,7 @@ function DashboardContent() {
       </div>
 
       <div className="mt-12 rounded-2xl border border-border bg-card p-6 shadow-card-soft">
-        <h3 className="font-display text-lg font-semibold">Riwayat Royalti (demo)</h3>
+        <h3 className="font-display text-lg font-semibold">Riwayat Royalti</h3>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="text-xs uppercase tracking-wider text-muted-foreground">
