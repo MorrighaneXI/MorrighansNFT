@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { FloatingSchoolItems } from "@/components/floating-school-items";
+import { useI18n } from "@/lib/i18n";
 import {
   ShieldCheck,
   Sparkles,
@@ -17,16 +18,16 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Morrighans NFT — Lindungi Modul Ajar dengan Blockchain" },
+      { title: "Morrighans NFT — Protect Teaching Modules with Blockchain" },
       {
         name: "description",
         content:
-          "Pendidik Indonesia kini bisa membuktikan kepemilikan modul ajar digital melalui NFT. Hashing SHA-256, metadata IPFS, dan royalti otomatis.",
+          "Educators can prove ownership of digital teaching modules through NFTs. SHA-256 hashing, IPFS metadata, and automatic royalties.",
       },
-      { property: "og:title", content: "Morrighans NFT — Hak Cipta Modul Ajar di Blockchain" },
+      { property: "og:title", content: "Morrighans NFT — Copyright for Teaching Modules on Blockchain" },
       {
         property: "og:description",
-        content: "Mint modul ajar Anda dalam hitungan menit. Aman, transparan, terverifikasi.",
+        content: "Mint your teaching modules in minutes. Secure, transparent, verified.",
       },
     ],
   }),
@@ -34,6 +35,7 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
+  const { t } = useI18n();
   return (
     <>
       {/* HERO */}
@@ -47,29 +49,28 @@ function LandingPage() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs backdrop-blur">
               <Sparkles className="h-3 w-3 text-chain" />
-              Era baru perlindungan IPR pendidik
+              {t("home.badge")}
             </div>
             <h1 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-balance md:text-6xl">
-              Modul ajar Anda, <span className="text-chain">aset digital</span> yang sah di blockchain.
+              {t("home.hero_title_a")} <span className="text-chain">{t("home.hero_title_b")}</span> {t("home.hero_title_c")}
             </h1>
             <p className="mt-6 max-w-xl text-base text-primary-foreground/80 md:text-lg">
-              Morrighans NFT membantu dosen & guru Indonesia melindungi karya intelektualnya — hashing kriptografis,
-              metadata terdesentralisasi, dan sertifikat kepemilikan yang dapat diverifikasi siapa saja.
+              {t("home.hero_sub")}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-chain text-primary hover:opacity-90">
                 <Link to="/upload">
-                  Mulai Mint Modul <ArrowRight className="ml-2 h-4 w-4" />
+                  {t("home.cta_mint")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/30 bg-white/5 text-primary-foreground hover:bg-white/10">
-                <Link to="/gallery">Jelajahi Galeri</Link>
+                <Link to="/gallery">{t("home.cta_gallery")}</Link>
               </Button>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-6 text-xs text-primary-foreground/70">
-              <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-chain" /> SHA-256 Verified</div>
-              <div className="flex items-center gap-2"><Database className="h-4 w-4 text-chain" /> IPFS Storage</div>
-              <div className="flex items-center gap-2"><Anchor className="h-4 w-4 text-chain" /> Metaplex NFT Standard</div>
+              <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-chain" /> {t("home.trust_sha")}</div>
+              <div className="flex items-center gap-2"><Database className="h-4 w-4 text-chain" /> {t("home.trust_ipfs")}</div>
+              <div className="flex items-center gap-2"><Anchor className="h-4 w-4 text-chain" /> {t("home.trust_metaplex")}</div>
             </div>
           </div>
 
@@ -77,23 +78,23 @@ function LandingPage() {
           <div className="relative">
             <div className="relative mx-auto w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-elegant">
               <div className="flex items-center justify-between">
-                <div className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">Certificate of Ownership</div>
+                <div className="text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">{t("home.cert_label")}</div>
                 <BadgeCheck className="h-5 w-5 text-chain" />
               </div>
               <div className="mt-4 rounded-2xl bg-gradient-to-br from-chain/30 to-primary-glow/30 p-6">
-                <div className="font-display text-xl font-semibold leading-tight">Ekosistem Mangrove Pesisir Jawa</div>
-                <div className="mt-1 text-xs text-primary-foreground/70">Dr. Anindya Kusuma · Universitas Indonesia</div>
+                <div className="font-display text-xl font-semibold leading-tight">{t("home.cert_title")}</div>
+                <div className="mt-1 text-xs text-primary-foreground/70">{t("home.cert_author")}</div>
                 <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
                   <div>
-                    <div className="text-primary-foreground/50 uppercase tracking-wider">Token</div>
+                    <div className="text-primary-foreground/50 uppercase tracking-wider">{t("home.cert_token")}</div>
                     <div className="font-mono mt-1">#1042</div>
                   </div>
                   <div>
-                    <div className="text-primary-foreground/50 uppercase tracking-wider">Royalty</div>
+                    <div className="text-primary-foreground/50 uppercase tracking-wider">{t("home.cert_royalty")}</div>
                     <div className="font-mono mt-1">10%</div>
                   </div>
                   <div className="col-span-2">
-                    <div className="text-primary-foreground/50 uppercase tracking-wider">Content Hash</div>
+                    <div className="text-primary-foreground/50 uppercase tracking-wider">{t("home.cert_hash")}</div>
                     <div className="font-mono mt-1 truncate">9f1a3b7c8e2d4f5a6b7c…</div>
                   </div>
                 </div>
@@ -101,7 +102,7 @@ function LandingPage() {
               <div className="mt-4 flex items-center justify-between text-xs">
                 <span className="font-mono text-primary-foreground/60">AnKx…UaM</span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-success/20 px-2 py-1 text-success">
-                  <span className="h-1.5 w-1.5 rounded-full bg-success" /> Minted
+                  <span className="h-1.5 w-1.5 rounded-full bg-success" /> {t("home.cert_minted")}
                 </span>
               </div>
             </div>
@@ -115,10 +116,10 @@ function LandingPage() {
       <section className="border-y border-border bg-card">
         <div className="container mx-auto grid grid-cols-2 gap-6 px-4 py-10 md:grid-cols-4 md:px-8">
           {[
-            { n: "1,284", l: "Modul terverifikasi" },
-            { n: "486", l: "Pendidik terdaftar" },
-            { n: "127", l: "Institusi mitra" },
-            { n: "10%", l: "Royalti otomatis" },
+            { n: "1,284", l: t("home.stat_modules") },
+            { n: "486", l: t("home.stat_educators") },
+            { n: "127", l: t("home.stat_institutions") },
+            { n: "10%", l: t("home.stat_royalty") },
           ].map((s) => (
             <div key={s.l} className="text-center">
               <div className="font-display text-2xl font-bold text-primary md:text-3xl">{s.n}</div>
@@ -131,30 +132,16 @@ function LandingPage() {
       {/* WHY */}
       <section className="container mx-auto px-4 py-20 md:px-8 md:py-28">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="text-xs font-medium uppercase tracking-[0.2em] text-chain">Mengapa NFT untuk pendidik?</div>
-          <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Karya akademis menghadapi tantangan digital baru.</h2>
-          <p className="mt-4 text-muted-foreground">
-            Plagiarisme, distribusi tanpa izin, dan hilangnya jejak kepemilikan adalah masalah nyata. Morrighans NFT memberi bukti yang tidak bisa diubah.
-          </p>
+          <div className="text-xs font-medium uppercase tracking-[0.2em] text-chain">{t("home.why_eyebrow")}</div>
+          <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">{t("home.why_title")}</h2>
+          <p className="mt-4 text-muted-foreground">{t("home.why_desc")}</p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {[
-            {
-              icon: Lock,
-              title: "Bukti kepemilikan permanen",
-              text: "Setiap modul memiliki hash unik & timestamp di blockchain — tak bisa diklaim ulang.",
-            },
-            {
-              icon: Coins,
-              title: "Royalti otomatis",
-              text: "Smart contract menjamin pendidik mendapat 10% dari setiap transfer aset.",
-            },
-            {
-              icon: GraduationCap,
-              title: "Kredensial akademik",
-              text: "Sertifikat digital yang dapat diverifikasi oleh institusi, kampus, dan publik.",
-            },
+            { icon: Lock, title: t("home.feat1_title"), text: t("home.feat1_text") },
+            { icon: Coins, title: t("home.feat2_title"), text: t("home.feat2_text") },
+            { icon: GraduationCap, title: t("home.feat3_title"), text: t("home.feat3_text") },
           ].map((f) => {
             const Icon = f.icon;
             return (
@@ -174,22 +161,22 @@ function LandingPage() {
       <section className="bg-secondary/40 py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-medium uppercase tracking-[0.2em] text-chain">Alur Mint</div>
-            <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Empat langkah dari modul ke sertifikat.</h2>
+            <div className="text-xs font-medium uppercase tracking-[0.2em] text-chain">{t("home.how_eyebrow")}</div>
+            <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">{t("home.how_title")}</h2>
           </div>
 
           <div className="mt-12 grid gap-4 md:grid-cols-4">
             {[
-              { i: Fingerprint, t: "Hashing", d: "File dipindai dan diubah jadi sidik jari SHA-256." },
-              { i: Database, t: "IPFS", d: "Metadata diunggah ke jaringan penyimpanan terdesentralisasi." },
-              { i: Anchor, t: "Mint", d: "Program Solana menerbitkan NFT Metaplex atas nama Anda." },
-              { i: BadgeCheck, t: "Verifikasi", d: "Sertifikat publik siap dibagikan & diverifikasi siapa saja." },
+              { i: Fingerprint, t: t("home.step_hash_t"), d: t("home.step_hash_d") },
+              { i: Database, t: t("home.step_ipfs_t"), d: t("home.step_ipfs_d") },
+              { i: Anchor, t: t("home.step_mint_t"), d: t("home.step_mint_d") },
+              { i: BadgeCheck, t: t("home.step_verify_t"), d: t("home.step_verify_d") },
             ].map((s, idx) => {
               const Icon = s.i;
               return (
                 <div key={s.t} className="relative rounded-2xl border border-border bg-card p-6 shadow-card-soft">
                   <div className="absolute -top-3 left-6 rounded-md bg-chain px-2 py-0.5 text-[10px] font-mono text-primary">
-                    STEP {idx + 1}
+                    {t("home.step_label")} {idx + 1}
                   </div>
                   <Icon className="h-7 w-7 text-primary" />
                   <div className="mt-4 font-display text-lg font-semibold">{s.t}</div>
@@ -209,14 +196,14 @@ function LandingPage() {
           <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto]">
             <div>
               <h3 className="font-display text-2xl font-bold md:text-3xl text-balance">
-                Siap mengamankan modul ajar pertama Anda?
+                {t("home.cta_title")}
               </h3>
               <p className="mt-3 max-w-xl text-primary-foreground/80">
-                Hubungkan wallet, unggah modul, dan terbitkan sertifikat NFT — dalam waktu kurang dari dua menit.
+                {t("home.cta_sub")}
               </p>
             </div>
             <Button asChild size="lg" className="bg-chain text-primary hover:opacity-90">
-              <Link to="/upload">Mulai Sekarang <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Link to="/upload">{t("home.cta_now")} <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
           </div>
         </div>

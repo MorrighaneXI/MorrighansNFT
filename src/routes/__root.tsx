@@ -12,25 +12,25 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { WalletProvider } from "@/lib/wallet-context";
+import { I18nProvider, useI18n } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
+  const { t } = useI18n();
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Halaman tidak ditemukan</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Modul atau halaman yang Anda cari mungkin sudah dipindahkan.
-        </p>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{t("nf.title")}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{t("nf.desc")}</p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Kembali ke beranda
+            {t("nf.home")}
           </Link>
         </div>
       </div>
@@ -41,6 +41,7 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const { t } = useI18n();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -48,12 +49,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Halaman gagal dimuat
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Terjadi kesalahan. Coba muat ulang atau kembali ke beranda.
-        </p>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">{t("err.title")}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{t("err.desc")}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -62,13 +59,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Coba lagi
+            {t("err.retry")}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Beranda
+            {t("err.home")}
           </a>
         </div>
       </div>
@@ -137,16 +134,18 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <WalletProvider>
-        <div className="flex min-h-screen flex-col bg-background">
-          <SiteHeader />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-        <Toaster position="top-right" richColors />
-      </WalletProvider>
+      <I18nProvider>
+        <WalletProvider>
+          <div className="flex min-h-screen flex-col bg-background">
+            <SiteHeader />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+          <Toaster position="top-right" richColors />
+        </WalletProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
